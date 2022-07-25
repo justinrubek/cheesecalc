@@ -2,30 +2,49 @@
   description = "cheese calculator";
 
   inputs = {
-    cargo2nix.url = "github:cargo2nix/cargo2nix/release-0.11.0";
-    nixpkgs.follows = "cargo2nix/nixpkgs";
-    flake-utils.follows = "cargo2nix/flake-utils";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, cargo2nix, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, gitignore, rust-overlay, ... }:
     flake-utils.lib.eachDefaultSystem (system: 
     let
         pkgs = import nixpkgs {
               inherit system;
-              overlays = [cargo2nix.overlays.default];
-        };
+              overlays = [
+                rust-overlay.overlays.default
 
-        rustPkgs = pkgs.rustBuilder.makePackageSet {
-            rustVersion = "1.60.0";
-            packageFun = import ./Cargo.nix;
+              ];
+        };
+        inherit (gitignore.lib) gitignoreSource;
+
+        rust = pkgs.rust-bin.stable.latest.default;
+        rustPackage = pkgs.rustPlatform.buildRustPackage {
+          pname = "cheesecalc";
+          version = "0.2.0";
+
+          src = gitignoreSource ./.;
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+          };
         };
     in rec {
         packages = {
-            cheesecalc = (rustPkgs.workspace.cheesecalc {}).bin;
+            cheesecalc = rustPackage;
             default = packages.cheesecalc;
         };
         devShells = {
-            default = (rustPkgs.workspaceShell { });
+            default = pkgs.mkShell {
+                buildInputs = with pkgs; [rust rustfmt];
+            };
         };
         apps = {
             cheesecalc = { type = "app"; program = "${packages.default}/bin/cheesecalc"; };
