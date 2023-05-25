@@ -1,5 +1,7 @@
 # cheesecalc
 
+https://justinrubek.github.io/cheesecalc/
+
 This is a quick and dirty calculator for preparing mac and cheese using ratios of sodium citrate, liquid, cheese, and pasta.
 
 For convenience this is packaged as a nix flake.
