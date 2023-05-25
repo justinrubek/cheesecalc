@@ -33,7 +33,7 @@ jobs:
         env:
           VERSION: ${{ steps.get-version.outputs.version }}
         run: |
-          nix develop -c cog changelog --at $VERSION -t full_hash > GITHUB_CHANGELOG.md
+          nix develop .#ci -c cog changelog --at $VERSION -t full_hash > GITHUB_CHANGELOG.md
 
       - name: generate release
         uses: softprops/action-gh-release@v1
