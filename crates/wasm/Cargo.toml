@@ -1,0 +1,13 @@
+[package]
+name = "cheesecalc-wasm"
+version = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+cheesecalc = { path = "../cheesecalc" }
+tracing = { workspace = true }
+wasm-bindgen = { workspace = true }
+serde-wasm-bindgen = "0.4"
