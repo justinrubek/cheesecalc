@@ -15,7 +15,7 @@
       pkgs.bacon
       # version control
       pkgs.cocogitto
-      # inputs'.bomper.packages.cli
+      inputs'.bomper.packages.cli
       # formatting
       self'.packages.treefmt
       # misc
