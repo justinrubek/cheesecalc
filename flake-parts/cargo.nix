@@ -7,19 +7,18 @@
     self',
     ...
   }: let
-    devTools = [
-      # rust tooling
-      self'.packages.rust-toolchain
-      pkgs.cargo-audit
-      pkgs.cargo-udeps
-      pkgs.bacon
-      # version control
-      pkgs.cocogitto
-      inputs'.bomper.packages.cli
-      # formatting
-      self'.packages.treefmt
-      # misc
-    ];
+    devTools =
+      [
+        # rust tooling
+        self'.packages.rust-toolchain
+        pkgs.cargo-audit
+        pkgs.cargo-udeps
+        pkgs.bacon
+        # formatting
+        self'.packages.treefmt
+        # misc
+      ]
+      ++ self'.legacyPackages.ciPackages;
 
     # packages required for building the rust packages
     extraPackages = [
