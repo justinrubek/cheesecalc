@@ -1,22 +1,7 @@
 use anyhow::{anyhow, Result};
-use clap::Clap;
+use clap::Parser;
 
-use std::collections::HashMap;
-
-/// Calculate the amount of sodium citrate, liquid, and pasta used to
-/// make mac & cheese from a given amount of ingredients on hand
-#[derive(Clap)]
-#[clap(version = "0.2.0", author = "Justin Rubek")]
-struct Opts {
-    /// Perform calculations on a given amount of cheese
-    #[clap(short,long)]
-    cheese: bool,
-    /// Perform calculations on a given amount of pasta
-    #[clap(short,long)]
-    pasta: bool,
-    /// The total mass of the ingredient to be used
-    mass: f64
-}
+mod commands;
 
 struct Ingredient {
     name: String,
@@ -34,9 +19,12 @@ impl Ingredient {
     }
 }
 
-fn print_results(items: &Vec<Ingredient>) {
+fn print_results(items: &[Ingredient]) {
     items.iter().for_each(|ingredient| {
-        println!("{}: {}{}", ingredient.name, ingredient.quantity, ingredient.unit);
+        println!(
+            "{}: {}{}",
+            ingredient.name, ingredient.quantity, ingredient.unit
+        );
     });
 }
 
@@ -47,7 +35,6 @@ fn from_cheese(cheese_mass: f64) -> Vec<Ingredient> {
         Ingredient::new("pasta", "g", cheese_mass * 0.84),
         Ingredient::new("sodium citrate", "g", cheese_mass * 0.04),
     ]
-
 }
 
 fn from_pasta(pasta_mass: f64) -> Vec<Ingredient> {
@@ -62,19 +49,18 @@ fn from_pasta(pasta_mass: f64) -> Vec<Ingredient> {
 }
 
 fn main() -> Result<()> {
-    let opts: Opts = Opts::parse();
+    let args = commands::Args::parse();
 
-    match (opts.cheese, opts.pasta) {
+    match (args.cheese, args.pasta) {
         (false, false) => Err(anyhow!("Must specify either cheese or pasta")),
         (true, true) => Err(anyhow!("Must specify cheese OR pasta, not both")),
         (true, false) => {
-            print_results(&from_cheese(opts.mass));
+            print_results(&from_cheese(args.mass));
             Ok(())
         }
         (false, true) => {
-            print_results(&from_pasta(opts.mass));
+            print_results(&from_pasta(args.mass));
             Ok(())
         }
     }
 }
-
