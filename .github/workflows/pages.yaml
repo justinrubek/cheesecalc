@@ -1,0 +1,33 @@
+name: publish github pages
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  publish-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v15
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            access-tokens = github=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build package
+        run:
+          nix build .#static-files
+
+      - name: deploy to pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: result/public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
