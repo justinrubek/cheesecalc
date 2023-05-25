@@ -20,7 +20,7 @@
     packages = {
       inherit static-files;
       serve = pkgs.writeShellApplication {
-        name = "serve-ayysee";
+        name = "serve-cheesecalc";
         runtimeInputs = [pkgs.miniserve];
         text = ''
           miniserve ${static-files}/public "$@"

@@ -1,5 +1,5 @@
 [package]
-name = "cheesecalc"
+name = "cheesecalc-cli"
 version = { workspace = true }
 edition = { workspace = true }
 
@@ -7,4 +7,5 @@ edition = { workspace = true }
 
 [dependencies]
 anyhow = "1.0"
+cheesecalc = { path = "../cheesecalc" }
 clap = { version = "4.0.19", features = ["derive"] }
