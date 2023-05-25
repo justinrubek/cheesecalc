@@ -5,41 +5,112 @@
 </head>
 
 <body>
+    <h1>mac and cheese</h1>
+    <p>
+        This is a calculator for making mac and cheese using sodium citrate.
+        You can use this to calculate the proper amount of each ingredient to use.
+
+        In order to use this calculator, you must know the mass of either the cheese or the pasta that you intend to
+        use.
+        The number (in grams) is entered into the calculator and the calculator will output the mass of the other
+        ingredients needed.
+    </p>
+
+    <h2>Recipe</h2>
+    <p>
+        This recipe is based on the recipe from <a
+            href="https://modernistcuisine.com/recipes/silky-smooth-macaroni-and-cheese/">Modernist Cuisine</a>.
+        The recipe is as follows:
+    </p>
+
+    <h3>Ingredients</h3>
+    <ul>
+        <li>liquid (water, milk, beer, etc.)</li>
+        <li>sodium citrate</li>
+        <li>grated cheese</li>
+        <li>pasta</li>
+    </ul>
+
+    <h3>Instructions for cheese sauce</h3>
+    <ol>
+        <li>Heat the liquid until it approaches a simmer. It does not need to be simmering, but it should be hot.</li>
+        <li>Use a whisk to stir in the sodium citrate until it is dissolved.</li>
+        <li>Slowly add the grated cheese over several minutes while constantly stirring with a whisk.</li>
+        <li>Once the cheese sauce has come together, add the pasta and stir until the pasta is coated.</li>
+    </ol>
+
+    <h3>Tips</h3>
+    <ul>
+        <li>Be careful about scorching the cheese sauce.</li>
+        <li>You can add spices or hot sauce at any stage of cooking. My favorite is white pepper (and black pepper at
+            the table).</li>
+        <li>I generally start with a base of cheddar cheese and add whatever other cheeses I have on hand.</li>
+        <li>I like to let the pasta let off as much steam as possible before adding the cheese sauce.</li>
+        <li>The amounts are merely suggestions. You can adjust this to suit your preferences or situation.</li>
+        <li>I like to make sure my pasta is started around the same time that I add the sodium citrate to the liquid.
+            This way, the pasta and cheese sauce are ready at the same time.</li>
+    </ul>
+
+    <h2>Calculator</h2>
+    <p>
+        Enter the mass of either the cheese or the pasta and the calculator will output the mass of the other
+        ingredients needed.
+    </p>
     <div id="input">
-        <label for="code">ayysee code</label>
-        <textarea id="code" rows="30" cols="80"></textarea>
+        <label for="input-mass">Mass of cheese or pasta (in grams):</label>
+        <input id="input-mass" type="number" value="200" />
+        <label for="mass-mode">Mass of:</label>
+        <select id="mass-mode">
+            <option value="cheese">Cheese</option>
+            <option value="pasta">Pasta</option>
+        </select>
+        <button id="calculate">Calculate</button>
     </div>
-    <button id="compile">compile</button>
-    <button id="copy">copy output</button>
     <div id="output">
-        <label for="code-output">MIPS assembly</label>
-        <textarea id="code-output" rows="30" cols="80"></textarea>
+        <label for="ingredients-output">Ingredients (in grams):</label>
+        <textarea id="ingredients-output" readonly></textarea>
     </div>
 
     <script type="module">
-        import init, {compile_code} from "./wasm/ayysee_wasm.js";
+        import init, {from_cheese_mass, from_pasta_mass} from "./wasm/cheesecalc_wasm.js";
 
-        async function click_compile() {
-            let code = document.getElementById("code").value;
-            let output = document.getElementById("code-output");
-            output.value = compile_code(code);
+        function get_ingredients_from_mass(mass, mass_mode) {
+            if (mass_mode == "cheese") {
+                return from_cheese_mass(mass);
+            } else if (mass_mode == "pasta") {
+                return from_pasta_mass(mass);
+            }
+        }
+
+        function ingredient_to_string(ingredient) {
+            // { name, unit, quantity }
+            return `${ingredient.name}: ${ingredient.quantity}${ingredient.unit}`;
+        }
+
+        async function calculate_ingredients() {
+            let input_mass = document.getElementById("input-mass").value;
+            let mass_mode = document.getElementById("mass-mode").value;
+
+            let ingredients = get_ingredients_from_mass(input_mass, mass_mode)
+                .map(ingredient_to_string)
+                .join("\n");
+            console.log(ingredients);
+
+            let output = document.getElementById("ingredients-output");
+            output.value = ingredients;
         }
 
         init().then(() => {
-            document.getElementById("compile").addEventListener("click", click_compile);
-            document.getElementById("copy").addEventListener("click", () => {
-                document.getElementById("code-output").select();
-                document.execCommand("copy");
-            });
+            document.getElementById("calculate").addEventListener("click", calculate_ingredients);
         });
     </script>
     <noscript>
         This page requires JavaScript to run.
         If you are seeing this message, JavaScript is disabled in your browser.
 
-        This page is a simple web interface for the ayysee compiler which is open source.
-        If you wish to use the compiler directly to avoid using JavaScript.
-        You may find the source code on <a href="https://github.com/justinrubek/ayysee">GitHub</a>.
+        This page is a simple web interface for a cheese calculator application.
+        If you wish to use the calculator directly to avoid using JavaScript.
+        You may find the source code on <a href="https://github.com/justinrubek/cheesecalc">GitHub</a>.
     </noscript>
     <style>
         #input {
@@ -47,10 +118,6 @@
         }
 
         #output {
-            margin: 10px;
-        }
-
-        #compile {
             margin: 10px;
         }
 
@@ -78,6 +145,23 @@
 
         #input {
             background-color: #eee;
+        }
+
+        #output {
+            background-color: #ddd;
+        }
+
+        #output textarea {
+            width: 100%;
+            height: 200px;
+        }
+
+        #output textarea:read-only {
+            background-color: #ddd;
+        }
+
+        #output textarea:focus {
+            background-color: #fff;
         }
     </style>
 
