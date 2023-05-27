@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.2](https://github.com/justinrubek/cheesecalc/compare/0.3.1..0.3.2) - 2023-05-27
+#### Features
+- **(web)** add favicon - ([53c84c8](https://github.com/justinrubek/cheesecalc/commit/53c84c88918cf98a97af2a8d9ea07cf9a66ba905)) - [@justinrubek](https://github.com/justinrubek)
+#### Miscellaneous Chores
+- **(web)** reword for clarity - ([d29530a](https://github.com/justinrubek/cheesecalc/commit/d29530a326a33a7e5ad278d82ab4c2be86027cbe)) - [@justinrubek](https://github.com/justinrubek)
+
+- - -
+
 ## [0.3.1](https://github.com/justinrubek/cheesecalc/compare/0.3.0..0.3.1) - 2023-05-27
 #### Bug Fixes
 - round number when calculating pasta mass - ([5334036](https://github.com/justinrubek/cheesecalc/commit/53340364455b276c1455db2a3853e95c70d2ef28)) - [@justinrubek](https://github.com/justinrubek)
