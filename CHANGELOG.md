@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.3](https://github.com/justinrubek/cheesecalc/compare/0.3.2..0.3.3) - 2023-05-27
+#### Bug Fixes
+- **(web)** remove leading slash from icons - ([551fa8e](https://github.com/justinrubek/cheesecalc/commit/551fa8efbbd5a745a46a0482ecc57f45411adfea)) - [@justinrubek](https://github.com/justinrubek)
+
+- - -
+
 ## [0.3.2](https://github.com/justinrubek/cheesecalc/compare/0.3.1..0.3.2) - 2023-05-27
 #### Features
 - **(web)** add favicon - ([53c84c8](https://github.com/justinrubek/cheesecalc/commit/53c84c88918cf98a97af2a8d9ea07cf9a66ba905)) - [@justinrubek](https://github.com/justinrubek)
