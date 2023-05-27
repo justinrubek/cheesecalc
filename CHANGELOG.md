@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.1](https://github.com/justinrubek/cheesecalc/compare/0.3.0..0.3.1) - 2023-05-27
+#### Bug Fixes
+- round number when calculating pasta mass - ([5334036](https://github.com/justinrubek/cheesecalc/commit/53340364455b276c1455db2a3853e95c70d2ef28)) - [@justinrubek](https://github.com/justinrubek)
+#### Build system
+- **(cargo)** specify metadata for cheesecalc lib - ([bf2b9bb](https://github.com/justinrubek/cheesecalc/commit/bf2b9bb202ec27fc613151b8bc3bdff2db3c32a1)) - [@justinrubek](https://github.com/justinrubek)
+- **(nix)** separate ci packages - ([13f7875](https://github.com/justinrubek/cheesecalc/commit/13f7875d98ca347745aaea374faba44e500b9b46)) - [@justinrubek](https://github.com/justinrubek)
+#### Continuous Integration
+- **(github/actions)** use ci devShell - ([cef9d44](https://github.com/justinrubek/cheesecalc/commit/cef9d44eec7734984f11811eb72336992f729d6e)) - [@justinrubek](https://github.com/justinrubek)
+#### Documentation
+- **(license)** add MIT license - ([bd107b7](https://github.com/justinrubek/cheesecalc/commit/bd107b7adf90d6097177582847086eb9c161fc9f)) - [@justinrubek](https://github.com/justinrubek)
+- **(readme)** add github pages url to readme - ([4b979bf](https://github.com/justinrubek/cheesecalc/commit/4b979bf2a9d546b5d9e08a19fd187591af15add0)) - [@justinrubek](https://github.com/justinrubek)
+
+- - -
+
 ## [0.3.0](https://github.com/justinrubek/cheesecalc/compare/0.2.1..0.3.0) - 2023-05-25
 #### Continuous Integration
 - **(github/actions)** create github release - ([547f7e2](https://github.com/justinrubek/cheesecalc/commit/547f7e2a2a1d12f75641cb7e084a24d64650ba6c)) - [@justinrubek](https://github.com/justinrubek)
