@@ -27,7 +27,7 @@ pub fn from_cheese_mass(cheese_mass: f64) -> Vec<Ingredient> {
 }
 
 pub fn from_pasta_mass(pasta_mass: f64) -> Vec<Ingredient> {
-    let cheese_mass = pasta_mass / 0.84;
+    let cheese_mass = (pasta_mass / 0.84).round();
 
     vec![
         Ingredient::new("cheese", "g", cheese_mass),
