@@ -11,6 +11,7 @@
     formatters = [
       pkgs.alejandra
       pkgs.rustfmt
+      pkgs.nodePackages.prettier
     ];
 
     treefmt = pkgs.writeShellApplication {

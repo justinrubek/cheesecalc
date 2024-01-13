@@ -6,3 +6,10 @@ includes = ["*.rs"]
 [formatter.nix]
 command = "alejandra"
 includes = ["*.nix"]
+
+[formatter.prettier]
+command = "prettier"
+options = ["--write"]
+includes = [
+    "*.html",
+]
