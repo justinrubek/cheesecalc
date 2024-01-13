@@ -117,7 +117,7 @@
           </div>
           <div id="output">
             <label for="ingredients-output">Ingredients needed:</label>
-            <textarea id="ingredients-output" readonly></textarea>
+            <ul id="ingredients-output"></ul>
           </div>
         </section>
       </article>
@@ -137,22 +137,45 @@
         }
       }
 
-      function ingredient_to_string(ingredient) {
+      const mapping = {
+        g: "grams",
+        ml: "mililiters",
+      };
+      function abbr_to_unit(abbr) {
+        if (mapping[abbr]) {
+          return mapping[abbr];
+        } else {
+          console.warn(`no abbreviation mapping found for ${abbr}`);
+          return abbr;
+        }
+      }
+
+      function ingredient_to_element(ingredient) {
         // { name, unit, quantity }
-        return `${ingredient.name}: ${ingredient.quantity}${ingredient.unit}`;
+        const unit_node = document.createElement("abbr");
+        unit_node.setAttribute("title", abbr_to_unit(ingredient.unit));
+        unit_node.appendChild(document.createTextNode(ingredient.unit));
+
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(ingredient.name + ": "));
+        li.appendChild(document.createTextNode(ingredient.quantity));
+        li.appendChild(document.createTextNode("\u00A0"));
+        li.appendChild(unit_node);
+
+        return li;
       }
 
       async function calculate_ingredients() {
         let input_mass = document.getElementById("input-mass").value;
         let mass_mode = document.getElementById("mass-mode").value;
 
-        let ingredients = get_ingredients_from_mass(input_mass, mass_mode)
-          .map(ingredient_to_string)
-          .join("\n");
-        console.log(ingredients);
+        let ingredients = get_ingredients_from_mass(input_mass, mass_mode).map(
+          ingredient_to_element
+        );
 
         let output = document.getElementById("ingredients-output");
-        output.value = ingredients;
+        output.innerHTML = "";
+        output.append(...ingredients);
       }
 
       init().then(() => {
@@ -218,6 +241,12 @@
 
       #output textarea:focus {
         background-color: #fff;
+      }
+
+      #ingredients-output {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
       }
     </style>
   </body>
