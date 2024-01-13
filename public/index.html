@@ -116,7 +116,7 @@
             <button id="calculate">Calculate</button>
           </div>
           <div id="output">
-            <label for="ingredients-output">Ingredients needed:</label>
+            <h4>Ingredients needed:</h4>
             <ul id="ingredients-output"></ul>
           </div>
         </section>
@@ -156,11 +156,18 @@
         unit_node.setAttribute("title", abbr_to_unit(ingredient.unit));
         unit_node.appendChild(document.createTextNode(ingredient.unit));
 
+        const ingredient_node = document.createElement("span");
+        ingredient_node.setAttribute("class", "ingredient");
+        ingredient_node.appendChild(document.createTextNode(ingredient.name));
+
+        const quantity_node = document.createElement("span");
+        quantity_node.appendChild(document.createTextNode(ingredient.quantity));
+        quantity_node.appendChild(document.createTextNode("\u00A0"));
+        quantity_node.appendChild(unit_node);
+
         const li = document.createElement("li");
-        li.appendChild(document.createTextNode(ingredient.name + ": "));
-        li.appendChild(document.createTextNode(ingredient.quantity));
-        li.appendChild(document.createTextNode("\u00A0"));
-        li.appendChild(unit_node);
+        li.appendChild(ingredient_node);
+        li.appendChild(quantity_node);
 
         return li;
       }
@@ -243,10 +250,19 @@
         background-color: #fff;
       }
 
+      #output > h4 {
+        margin-top: 0;
+        padding-top: 0;
+      }
+
       #ingredients-output {
         list-style: none;
         margin-left: 0;
         padding-left: 0;
+      }
+
+      span.ingredient::after {
+        content: ": ";
       }
     </style>
   </body>
