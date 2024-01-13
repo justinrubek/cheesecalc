@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.5](https://github.com/justinrubek/cheesecalc/compare/0.3.4..0.3.5) - 2024-01-13
+#### Refactoring
+- **(html)** clean up ingredient list formatting - ([7a3ac1e](https://github.com/justinrubek/cheesecalc/commit/7a3ac1e83d366cb670b8052e13e1b02e5d2a6c7f)) - [@justinrubek](https://github.com/justinrubek)
+
+- - -
+
 ## [0.3.4](https://github.com/justinrubek/cheesecalc/compare/0.3.3..0.3.4) - 2024-01-13
 #### Bug Fixes
 - correct typo - ([b2f4871](https://github.com/justinrubek/cheesecalc/commit/b2f4871711bc99b382a6dc8c6c241668c27fe198)) - [@justinrubek](https://github.com/justinrubek)
