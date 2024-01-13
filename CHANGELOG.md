@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.4](https://github.com/justinrubek/cheesecalc/compare/0.3.3..0.3.4) - 2024-01-13
+#### Bug Fixes
+- correct typo - ([b2f4871](https://github.com/justinrubek/cheesecalc/commit/b2f4871711bc99b382a6dc8c6c241668c27fe198)) - [@justinrubek](https://github.com/justinrubek)
+#### Features
+- **(html)** specify language - ([3606111](https://github.com/justinrubek/cheesecalc/commit/36061111a5f920d2768c6bce59a36288371d1aee)) - [@justinrubek](https://github.com/justinrubek)
+#### Refactoring
+- **(html)** display ingredients as ul element - ([c369371](https://github.com/justinrubek/cheesecalc/commit/c369371dd32973aeb7f53c7112a921ac2ae5a6e7)) - [@justinrubek](https://github.com/justinrubek)
+- **(html)** add html landmarks - ([5f8608d](https://github.com/justinrubek/cheesecalc/commit/5f8608dbcac70cb9b36d88a42f6df73e93b5972c)) - [@justinrubek](https://github.com/justinrubek)
+#### Style
+- **(treefmt)** add prettier for html files - ([a0a5333](https://github.com/justinrubek/cheesecalc/commit/a0a5333b79c491974f2a7f6a10fb0110630c6ef3)) - [@justinrubek](https://github.com/justinrubek)
+
+- - -
+
 ## [0.3.3](https://github.com/justinrubek/cheesecalc/compare/0.3.2..0.3.3) - 2023-05-27
 #### Bug Fixes
 - **(web)** remove leading slash from icons - ([551fa8e](https://github.com/justinrubek/cheesecalc/commit/551fa8efbbd5a745a46a0482ecc57f45411adfea)) - [@justinrubek](https://github.com/justinrubek)
